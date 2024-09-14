@@ -1,10 +1,14 @@
-import sys
 from collections import deque
-N=int(sys.stdin.readline())
-q=deque([])
-for i in range(1,N+1):
-    q.append(i)
-while len(q)!=1:
+import sys
+
+n = int(sys.stdin.readline().strip())
+cards = [i for i in range(1, n+1)]
+q = deque(cards)
+        
+while len(q) > 1:
     q.popleft()
-    q.rotate(-1)
+    temp = q[0]
+    q.popleft()
+    q.append(temp)
+
 print(q[0])

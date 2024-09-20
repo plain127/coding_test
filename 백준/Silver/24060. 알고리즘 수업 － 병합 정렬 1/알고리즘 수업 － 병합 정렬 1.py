@@ -40,9 +40,10 @@ def merge(a, p, q, r):
             break
         i+=1
         t+=1
-
-n, k = map(int, input().split())
-a = list(map(int, input().split()))
+import sys
+#in_file = open('input.txt', 'r')
+n, k = map(int, sys.stdin.readline().strip().split())
+a = list(map(int, sys.stdin.readline().strip().split()))
 c = 0
 res = -1
 merge_sort(a, 0, n-1)

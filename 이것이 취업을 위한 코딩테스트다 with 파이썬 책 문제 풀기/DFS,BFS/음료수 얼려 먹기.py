@@ -1,25 +1,47 @@
 #내가 푼 풀이
+from collections import deque
 n, m = map(int, input().split())
 
-ice = []
-ice_graph = []
+dx = [-1,1,0,0]
+dy = [0,0,-1,1]
 
+graph = [[] for _ in range(n)]
 for i in range(n):
-    ice.append(input().split())
+    graph[i] = list(map(int, input().strip()))
+    
+count = 0
+def bfs(x, y):
+    q = deque()
+    q.append((x, y))
+    global count
+    while q:
+        x, y = q.popleft()
+        
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            
+            if 0 <= nx < m and 0 <= ny < n and graph[ny][nx] == 0:
+                q.append((nx, ny))
+                graph[ny][nx] = 1
+    
+    count += 1            
+    
+for y in range(n):
+    for x in range(m):
+        if graph[y][x] == 0:
+            bfs(x, y)
+            
+print(count)
 
-for i in range(len(ice)):
-    if ice[i] == 0:
-        ice_graph.append(i)
-
-def dfs(ice_graph):
-
-#책 풀이
+#책 풀이(DFS)
 n, m = map(int, input().split())
 
 graph = []
 for i in range(n):
-    graph.append(list(map(int,input())))
-
+    graph.append(list(map(int, input())))
+    
+    
 def dfs(x, y):
     if x <= -1 or x >= n or y <= -1 or y >= m:
         return False

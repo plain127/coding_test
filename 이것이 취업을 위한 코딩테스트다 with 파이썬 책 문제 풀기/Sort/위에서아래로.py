@@ -1,12 +1,10 @@
-# 내가 푼 풀이
+#내가 푼 풀이
 n = int(input())
+array = []
+for _ in range(n):
+    array.append(int(input()))
 
-arr = []
+array.sort(reverse=True)
 
-for i in range(n):
-    arr.append(int(input()))
-
-arr.sort(reverse = True)
-
-for i in arr:
-    print(i, end = ' ')
+for i in array:
+    print(i, end=" ")

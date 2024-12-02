@@ -1,16 +1,16 @@
 import sys
-
 input = sys.stdin.readline
 
-N,M=map(int,input().split())
-card_num = list(map(int,input().split()))
-max_sum = 0
+n, m = map(int, input().split())
+cards = list(map(int, input().split()))
+result = 0
 
-for i in range(N):
-    for j in range(i+1,N):
-        for k in range(j+1,N):
-            res = card_num[i] + card_num[j] + card_num[k]
-            if res <= M:
-                max_sum = max(max_sum,res)
+for i in range(n):
+    for j in range(i+1, n):
+        for k in range(j+1, n):
+            total = cards[i] + cards[j] + cards[k]
+            if total <= m :
+                result = max(result, total)
 
-print(max_sum)
+            
+print(result)

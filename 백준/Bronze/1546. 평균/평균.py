@@ -1,10 +1,15 @@
-N=int(input())
-s=0
-if(N<=1000):
-    score =list(map(int,input().split(' ',N)))
-M = max(score)
-if(M!=0 and M<=100):
-    for i in range(0,N):
-        s=s+score[i]/M*100
-avg=s/N
-print(avg)
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+scores = list(map(float, input().split()))
+scores.sort(reverse=True)
+new_scores = []
+
+for i in range(n):
+    new_score = (scores[i]/scores[0])*100
+    new_scores.append(new_score)
+
+avg = sum(new_scores)/n
+
+print(avg)        

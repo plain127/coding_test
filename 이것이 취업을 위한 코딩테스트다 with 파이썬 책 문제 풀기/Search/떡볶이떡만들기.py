@@ -1,37 +1,33 @@
-# 내가 푼 풀이
-n, m = map(int,input().split())
+#내 풀이
+import sys
 
-dducks = list(map(int, input().split()))
+input = sys.stdin.readline
 
-dducks.sort(reverse=True)
+n, m = map(int, input().split())
 
-result_box = []
+dduks = list(map(int, input().split()))
 
-for h in range(dducks[0]+1):
-    result = 0
-    
-    for dduck in dducks:
-        if dduck <= h:
-            break
-        result += dduck - h
+start, end = 0, max(dduks)
 
-    result_box.append(result)
+result = 0
+while start <= end:
+    mid = (start + end) // 2
 
-def binary_search(result_box, m, start, end):
-    while start <= end:
-        mid = (start + end) // 2
+    line = 0
 
-        if result_box[mid] == m:
-            return mid
-        elif result_box[mid] < m:
-            end = mid - 1
-        else:
-            start = mid + 1
-    return mid
+    for dduk in dduks:
+        if dduk > mid:
+            line += dduk - mid
 
-print(binary_search(result_box, m, 0, dducks[0]))
+    if line >= m:
+        result = mid
+        start = mid + 1
+    else:
+        end = mid - 1
 
-# 책 풀이
+print(result)
+
+#책 풀이
 n, m = list(map(int, input().split(' ')))
 
 array = list(map(int, input().split()))
@@ -40,16 +36,17 @@ start = 0
 end = max(array)
 
 result = 0
-while(start <= end):
+while start<=end:
     total = 0
     mid = (start + end) // 2
     for x in array:
         if x > mid:
             total += x - mid
+    
     if total < m:
         end = mid - 1
     else:
         result = mid
-        start = mid +1
+        start = mid + 1
 
 print(result)

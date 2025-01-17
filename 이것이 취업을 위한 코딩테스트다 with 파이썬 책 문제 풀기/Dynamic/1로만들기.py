@@ -1,63 +1,40 @@
-# 내가 푼 풀이
+#내 풀이
+import sys
+
+input = sys.stdin.readline
+
 x = int(input())
 
-cnt = 0
+count = [0]*30001
 
-<<<<<<< HEAD
-while True:
-    if x % 5 == 0:
-        x = x // 5
-        cnt += 1
-    
-    elif x % 3 == 0:
-        x = x // 3
-        cnt += 1
-    
-    elif x % 2 == 0:
-        x = x // 2
-        cnt += 1
-    
-    else:
-        x -= 1
-        cnt += 1
-    
-    if x == 1:
-        break
-    
-print(cnt)
-=======
-def calc(x, cnt):
-    cnt += 1
-    if x % 5 == 0:
-        x = x / 5
-    elif x % 3 == 0:
-        x = x / 3
-    elif x % 2 == 0:
-        x = x / 2
-    else:
-        x -= 1
-    
-    if x == 1:
-        return cnt
+for i in range(2, x+1):
+    a = 30001
+    b = 30001
+    c = 30001
+    if i%5 == 0:
+        a = count[i//5] + 1
+    elif i%3 == 0:
+        b = count[i//3] + 1
+    elif i%2 == 0:
+        c = count[i//2] + 1
+    d = count[i-1] + 1
 
-print(cnt)
+    count[i] = min(a, b, c, d)
 
-# 책 풀이 
+print(count[x])
+
+#책 풀이
 x = int(input())
 
 d = [0] * 30001
 
-for i in range(2, x + 1):
-    d[i] = d[i - 1] + 1
-
-    if i % 2 == 0:
-        d[i] = min(d[i], d[i // 2] + 1)
-    
-    if i % 3 == 0:
-        d[i] = min(d[i], d[i // 3] + 1)
-    
-    if i % 5 == 0:
-        d[i] = min(d[i], d[i // 5] + 1)
+for i in range(2, x+1):
+    d[i] = d[i-1] + 1
+    if i%2 == 0:
+        d[i] = min(d[i], d[i//2]+1)
+    if i%3 == 0:
+        d[i] = min(d[i], d[i//3]+1)
+    if i%5 == 0:
+        d[i] = min(d[i], d[i//5]+1)
 
 print(d[x])
->>>>>>> 5bdb2beddc788b827a7a62597e97553c5b2f4a99

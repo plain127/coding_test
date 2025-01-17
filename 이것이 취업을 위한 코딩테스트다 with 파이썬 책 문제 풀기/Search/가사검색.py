@@ -44,3 +44,4 @@ def solution(words, queries):
         answer.append(res)
     
     return answer
+ 

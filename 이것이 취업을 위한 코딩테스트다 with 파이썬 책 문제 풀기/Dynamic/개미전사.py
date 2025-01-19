@@ -1,18 +1,18 @@
-# 내가 푼 풀이
+#내 풀이
+import sys
+
+input = sys.stdin.readline
+
 n = int(input())
+k = list(map(int, input().split()))
 
-food = list(map(int, input().split()))
-
-d = [0] * 100
-
-for i in range(n):
-    if i == 0 or i == 1:
-        d[i] = food[i]
+count = [0]*1001
+count[0] = k[0]
+count[1] = k[1]
+for i in range(2, n):
+    count[i] = k[i] + count[i-2]
     
-    d[i] = max(d[i - 1], d[i - 2] + food[i])
-               
-    
-print(d[n-1])
+print(max(count))
 
 #책 풀이
 n = int(input())
@@ -21,9 +21,9 @@ array = list(map(int, input().split()))
 
 d = [0] * 100
 
-d[0] = array[0]
-d[1] = array[1]
+d[0]=array[0]
+d[1]=max(array[0],array[1])
 for i in range(2,n):
-    d[i] = max(d[i - 1], d[i - 2] + array[i])
-    
-print(d[n - 1])
+    d[i] = max(d[i-1],d[i-2]+array[i])
+
+print(d[n-1])

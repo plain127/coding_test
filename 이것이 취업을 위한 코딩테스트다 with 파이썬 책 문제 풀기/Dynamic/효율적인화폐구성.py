@@ -1,36 +1,37 @@
-# 내가 푼 풀이
+#내 풀이
 import sys
 
-n, m = map(int,input().split())
+input = sys.stdin.readline
 
-values = []
+n, m = map(int, input().split())
 
-for i in range(n):
-    values.append(int(sys.stdin.readline().rstrip()))
-    
-values.sort(reverse=True)
+values = [0]*10001
 
-d = [0] * 10001
+for i in range(1,n+1):
+    value = int(input())
+    values[value] += 1
 
-for val in values:
-    if m % val == 0:
-        d[m] = min(d[val], d[m // val] + 1)
-        
-# 책 풀이
+counts = [0]*(m+1)
+
+for i in range(1, m+1):
+
+    counts[i] = counts[i-1] + 1 
+
+#책 풀이
 n, m = map(int, input().split())
 
 array = []
 for i in range(n):
     array.append(int(input()))
-    
+
 d = [10001] * (m+1)
 
 d[0] = 0
 for i in range(n):
-    for j in range(array[i], m + 1):
-        if d[j - array[i]] != 10001:
-            d[j] = min(d[j], d[j - array[i]] + 1)
-            
+    for j in range(array[i], m+1):
+        if d[j-array[i]] != 10001:
+            d[j] = min(d[j], d[j - array[i]]+1)
+
 if d[m] == 10001:
     print(-1)
 else:

@@ -1,41 +1,30 @@
 import sys
-import heapq
+from collections import deque
 
 input = sys.stdin.readline
-INF = int(1e9)
 
 n, k = map(int, input().split())
-max_range = max(2*k, n)
+graph = [-1]*100001
 
-graph = [[] for _ in range(max_range+1)]
-times = [INF]*(max_range+1)
-
-for i in range(max_range+1):
-    if i+1 <= max_range:
-        graph[i].append((i+1,1))
-    if i-1 >= 0:
-        graph[i].append((i-1,1))
-    if i*2 <= max_range:
-        graph[i].append((i*2, 0))
-
-def dijkstra(start):
-    q = []
-    heapq.heappush(q,(0, start))
-    times[start] = 0
+def bfs(n, k):
+    q = deque()
+    q.append(n)
+    graph[n] = 0
 
     while q:
-        time, now = heapq.heappop(q)
+        v = q.popleft()
 
-        if times[now] < time:
-            continue
+        if v == k :
+            break
 
-        for next, cost in graph[now]:
-            new = time + cost
+        for i in (v-1), (v+1), (2*v):
+            if 0<=i<=100000 and graph[i] == -1:
+                if i == 2*v:
+                    graph[i] = graph[v]
+                    q.appendleft(i)
+                else:
+                    graph[i] = graph[v] + 1
+                    q.append(i)
 
-            if new < times[next]:
-                times[next] = new
-                heapq.heappush(q, (new, next))
-
-dijkstra(n)
-
-print(times[k])
+bfs(n, k)
+print(graph[k])

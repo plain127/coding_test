@@ -1,33 +1,23 @@
 import sys
+from bisect import bisect_left, bisect_right
 
 input = sys.stdin.readline
 
 n = int(input())
-cards = list(map(int, input().split()))
-cards.sort()
+num = list(map(int, input().split()))
+num.sort()
 
 m = int(input())
-targets = list(map(int,input().split()))
+targets = list(map(int, input().split()))
 
-results = {}
-for card in cards:
-    if card in results:
-        results[card] += 1
-    else:
-        results[card] = 1
+def count_by_range(num, target):
+    left_idx = bisect_left(num, target)
+    right_idx = bisect_right(num, target)
+    return right_idx - left_idx
 
-def binary_search(cards, target, start, end):
-    while start <= end:
-        mid = (start + end) // 2
-
-        if cards[mid] == target:
-            return results.get(target)
-        elif cards[mid] > target:
-            end = mid - 1
-        else:
-            start = mid + 1
-    
-    return 0
+results = []
 
 for target in targets:
-    print(binary_search(cards, target, 0, len(cards)-1), end = ' ')
+    results.append(count_by_range(num, target))
+
+print(' '.join(map(str, results)))

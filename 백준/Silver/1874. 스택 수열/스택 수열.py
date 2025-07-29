@@ -1,37 +1,28 @@
+import sys
 from collections import deque
+
+input = sys.stdin.readline
+
 n = int(input())
-nums= deque()
-nums_sort = []
+seq = deque([int(input()) for _ in range(n)])
+
 stack = []
-results = []
+lst = []
+result = []
 
-for _ in range(n):
-    num = int(input())
-    nums.append(num)
-    nums_sort.append(num)
+for i in range(1,n+1):
+    stack.append(i)
+    result.append('+')
     
-nums_sort.sort(reverse=True)
+    while stack:
+        if stack[-1] != seq[0]:
+            break
+        lst.append(stack.pop())
+        seq.popleft()
+        result.append('-')
 
-while len(nums_sort) > 0:
-    if len(stack) == 0:
-        stack.append(nums_sort.pop())
-        results.append('+')
-    else:
-        if stack[-1] != nums[0]:
-            stack.append(nums_sort.pop())
-            results.append('+')
-        else:
-            stack.pop()
-            nums.popleft()
-            results.append('-')
-            
-while len(stack) > 0:
-    if stack.pop() != nums.popleft():
-        print('NO')
-        break
-    else:
-        results.append('-')
-
-if len(stack) == 0:
-    for result in results:
-        print(result)
+if seq:
+    print('NO')
+else:
+    for r in result:
+        print(r)

@@ -3,18 +3,12 @@ import sys
 input = sys.stdin.readline
 
 n, m = map(int, input().split())
-graph = [0]
-graph += list(map(int, input().split()))
+nums = list(map(int, input().split()))
 
-for i, num in enumerate(graph):
-    if i > 0:
-        graph[i] = graph[i-1] + num
-
-results = []
+prefix_sum = [0]*(n+1)
+for i in range(1,n+1):
+    prefix_sum[i] = prefix_sum[i-1] + nums[i-1]
 
 for _ in range(m):
-    i, j = map(int, input().split())
-    results.append(graph[j] - graph[i-1])
-
-for result in results:
-    print(result)
+    start, end = map(int, input().split())
+    print(prefix_sum[end] - prefix_sum[start-1])

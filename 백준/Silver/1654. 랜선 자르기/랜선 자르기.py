@@ -2,22 +2,18 @@ import sys
 
 input = sys.stdin.readline
 
-k, n = map(int,input().split())
+k, n = map(int, input().split())    
+lines = [int(input()) for _ in range(k)]
 
-lines = []
-
-for _ in range(k):
-    lines.append(int(input()))
-
-start, end = 1, max(lines)
+start = 1
+end = max(lines)
 
 while start <= end:
-    mid = (start + end) // 2
-    lans = 0
-    for line in lines:
-        lans += line // mid
+    mid = (start + end)//2
 
-    if lans >= n:
+    cnt = sum(l//mid for l in lines)
+    
+    if cnt >= n:
         start = mid + 1
     else:
         end = mid - 1

@@ -1,33 +1,40 @@
 import sys
 
-sys.setrecursionlimit(10**9)
 input = sys.stdin.readline
 
 n = int(input())
-paper = []
+paper = [list(map(int, input().split())) for _ in range(n)]
 
-for _ in range(n):
-    paper.append(list(map(int, input().split())))
+w_cnt = 0
+b_cnt = 0
 
-white, blue = 0, 0
+def divide(row, col, size):
+    global w_cnt, b_cnt
+    color = paper[row][col]
+    same = True
 
-def cut(x, y, n):
-    global white, blue
-    color = paper[x][y]
+    for r in range(row, row+size):
+        for c in range(col, col+size):
+            if paper[r][c] != color:
+                same = False
+                break
+        
+        if not same:
+            break
 
-    for i in range(x, x+n):
-        for j in range(y, y+n):
-            if color != paper[i][j]:
-                cut(x, y, n//2)
-                cut(x, y+n//2, n//2)
-                cut(x+n//2, y, n//2)
-                cut(x+n//2, y+n//2, n//2)
-                return
-            
-    if color == 0:
-        white += 1
+    if same:
+        if color ==  0:
+            w_cnt+=1
+        else:
+            b_cnt+=1
+
     else:
-        blue += 1
+        half = size//2
+        divide(row, col, half)
+        divide(row+half, col, half)
+        divide(row, col+half, half)
+        divide(row+half, col+half, half)
 
-cut(0,0,n)
-print(white, blue, sep='\n')
+divide(0,0,n)
+print(w_cnt)
+print(b_cnt)

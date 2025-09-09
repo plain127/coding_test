@@ -1,9 +1,9 @@
 import sys
-from collections import deque
+
+sys.setrecursionlimit(10**9)
 input = sys.stdin.readline
 
 n = int(input())
-
 tree = [[] for _ in range(n+1)]
 
 for _ in range(n-1):
@@ -11,21 +11,13 @@ for _ in range(n-1):
     tree[u].append(v)
     tree[v].append(u)
 
-for i in range(1, n+1):
-    tree[i].sort()
+parent = [0]*(n+1)
+def dfs(node, par):
+    for nxt in tree[node]:
+        if nxt != par:
+            parent[nxt] = node
+            dfs(nxt, node)
+dfs(1,1)
 
-visited = [0]*(n+1)
-
-q = deque()
-q.append(1)
-visited[1] = -1
-
-while q : 
-    s = q.popleft()
-    for i in tree[s]:
-        if visited[i] == 0:
-            q.append(i)
-            visited[i] = s
-
-for i in range(2, n+1):
-    print(visited[i])
+for i in range(2,n+1):
+    print(parent[i])

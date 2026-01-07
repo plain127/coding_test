@@ -2,7 +2,7 @@ import sys
 
 input = sys.stdin.readline
 
-def fibonacci(n,dp):
+def fibonacci(n, dp):
     dp[0] = [1, 0]
     dp[1] = [0, 1]
     for i in range(2, n+1):
@@ -17,6 +17,6 @@ for _ in range(int(input())):
     fibonacci(n, dp)
     results.append(dp[n])
 
-for result in results:
-    zero, one = result
+for r in results:
+    zero, one = r
     print(zero, one)

@@ -6,7 +6,7 @@ input = sys.stdin.readline
 n, m = map(int, input().split())
 graph = [[] for _ in range(n+1)]
 visited = [False]*(n+1)
-count = 0
+cnt = 0
 
 for _ in range(m):
     u, v = map(int, input().split())
@@ -23,7 +23,7 @@ def bfs(start):
 
     while q:
         node = q.popleft()
-        
+
         for leaf in graph[node]:
             if visited[leaf] == False:
                 visited[leaf] = True
@@ -32,6 +32,6 @@ def bfs(start):
 for i in range(1,n+1):
     if visited[i] == False:
         bfs(i)
-        count+=1
+        cnt += 1
 
-print(count)
+print(cnt)

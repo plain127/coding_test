@@ -2,13 +2,10 @@ import sys
 
 input = sys.stdin.readline
 
-n = int(input().strip())
-coord = list(map(int, input().strip().split()))
+n = int(input())
+x = list(map(int, input().split()))
+x_s = sorted(set(x))
 
-sort_coords = sorted(set(coord))
-
-compress = {val : i for i, val in enumerate(sort_coords)}
-
-compress_coord = [compress[val] for val in coord]
-
-print(' '.join(map(str, compress_coord)))
+compress = {val : i for i, val in enumerate(x_s)}
+compress_x = [compress[val] for val in x]
+print(' '.join(map(str, compress_x)))

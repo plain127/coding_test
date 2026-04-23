@@ -15,7 +15,7 @@ def dfs(cur, visited):
         if w[cur][0] == 0:
             return INF
         return w[cur][0]
-    
+
     if dp[cur][visited] != -1:
         return dp[cur][visited]
 
@@ -32,5 +32,5 @@ def dfs(cur, visited):
         dp[cur][visited] = min(dp[cur][visited], cost)
 
     return dp[cur][visited]
-    
+
 print(dfs(0, 1<<0))
